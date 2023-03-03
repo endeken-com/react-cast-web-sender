@@ -71,11 +71,12 @@ const CastProvider = ({
     };
 
     if ((window.chrome && window.chrome.cast) && window.cast) {
+      const defaultId = window.chrome.cast?.media?.DEFAULT_MEDIA_RECEIVER_APP_ID;
       window.cast.framework.CastContext.getInstance().setOptions({
-        receiverApplicationId,
-        resumeSavedSession,
-        autoJoinPolicy,
-        language
+         receiverApplicationId: receiverApplicationId || defaultId,
+         resumeSavedSession,
+         autoJoinPolicy,
+         language
       });
       const player = new window.cast.framework.RemotePlayer();
       setPlayer(player);
